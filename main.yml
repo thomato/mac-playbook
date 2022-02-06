@@ -1,13 +1,23 @@
 ---
 - hosts: localhost
-  user: nandothomassen
+  user: '{{ username }}'
   connection: local
 
   vars_files:
     - vars/main.yml
+    - vars/local.yml
 
   roles:
     - geerlingguy.homebrew
 
-  tasks: []
+  tasks:
+    - name: "Create Infrastructure directory"
+      file:
+        path: "/Users/{{ username }}/Developer/Infrastructure"
+        state: directory
+
+    - name: "Create Ansible directory"
+      file:
+        path: "/Users/{{ username }}/Developer/Infrastructure/Ansible"
+        state: directory
 
